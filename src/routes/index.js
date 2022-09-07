@@ -11,5 +11,8 @@ rutas.get('/user', [ verifyAuth.verifyToken ],  userController.indexUser)
 // **** API POST ****
 rutas.post('/post/create', [ verifyAuth.verifyToken ], postController.createPost)
 rutas.get('/post/read', [ verifyAuth.verifyToken ], postController.readPosts)
+rutas.put('/post/update/:id', [ verifyAuth.verifyToken ], postController.updatePost)
+rutas.delete('/post/remove/:id', [ verifyAuth.verifyToken ], postController.removePost)
+rutas.get('/post/get/:id', [ verifyAuth.verifyToken ], postController.getPost)
 // ******************
 module.exports = rutas

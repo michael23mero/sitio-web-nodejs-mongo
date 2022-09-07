@@ -26,7 +26,7 @@ rutas.get('/post-create', (req, res) => {
         headers: { 'x-access-token': req.cookies.token }
     }).then(resp => {
         res.render('views-user/form', { title: 'Home', user: resp.data })
-    }).catch(err => { res.redirect('/post-save')})
+    }).catch(err => { res.redirect('/login')})
 })
 
 rutas.post('/post-save', (req, res) => {
