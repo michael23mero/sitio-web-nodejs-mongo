@@ -23,6 +23,7 @@ class Servidor{
     routes(){
         this.app.use('/api/v1', require('./routes'))
         this.app.use(require('./routes/auth.routes'))
+        this.app.use(require('./routes/user.routes'))
     }
 
     views(){

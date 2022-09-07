@@ -3,17 +3,6 @@ const axios = require('axios')
 
 const URL = 'http://localhost:3000/api/v1'
 
-rutas.get('/home', (req, res) =>{
-    axios.get(`${URL}/user`, {
-        headers: { 'x-access-token': req.cookies.token }
-    }).then(resp => {
-        console.log(resp.data)
-        res.render('home', { title: 'Home', user: resp.data })
-    }).catch(err => {
-        res.redirect('/login')
-    })
-})
-
 rutas.get('/register', (req, res) =>{ res.render('register', {title: 'Register', alert: false}) })
 
 rutas.post('/register', (req, res) => {
