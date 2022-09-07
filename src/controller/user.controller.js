@@ -5,12 +5,13 @@ const registerUser = async (req, res) => {
     const { ...data } = req.body
     const existe = await ModelUser.findOne({ username: data.username})
     if(existe){
-        return res.json({msg: `El usuario: ${data.username} ya se encuentra registrado`})
+        return res.status(400).json({msg: `El usuario: ${data.username} ya se encuentra registrado`})
     }
     const user = new ModelUser(data)
     user.password = await user.encryptPassword(data.password)
     await user.save()
-    return res.status(200).json({msg: `User created successfully`})
+    
+    return res.status(201).json({user: `User created successfully`})
 }
 
 const loginUser = async (req, res) => {
@@ -31,7 +32,7 @@ const loginUser = async (req, res) => {
 
 const indexUser = async (req, res) => {
     const user = await ModelUser.findById(req.userId, {password: 0})
-    return res.json(user)
+    return res.status(200).json(user)
 }
 
 module.exports = { registerUser, loginUser, indexUser }
