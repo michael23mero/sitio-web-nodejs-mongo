@@ -9,7 +9,7 @@ rutas.get('/user', [ verifyAuth.verifyToken ],  userController.indexUser)
 
 
 // **** API POST ****
-rutas.post('/post/create', postController.createPost)
+rutas.post('/post/create', [ verifyAuth.verifyToken ], postController.createPost)
 rutas.get('/post/read', [ verifyAuth.verifyToken ], postController.readPosts)
 // ******************
 module.exports = rutas

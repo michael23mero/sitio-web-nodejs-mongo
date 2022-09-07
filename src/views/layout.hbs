@@ -23,13 +23,15 @@
                     </li>
                 {{#if user}}
                     <li class="nav-item active">
+                        <a href="/post-create" class="nav-link"><i class="fas fa-power-off"></i> Add</a>
+                    </li>
+                    <li class="nav-item active">
                         <a href="/logout" class="nav-link"><i class="fas fa-power-off"></i> Close</a>
                     </li>
                 {{else}}
                     <li class="nav-item active">
-                        <a href="/logout" class="nav-link"><i class="fas fa-user"></i> Login</a>
+                        <a href="/login" class="nav-link"><i class="fas fa-user"></i> Login</a>
                     </li>
-                
                 {{/if}}
                 </ul>
             </div>
