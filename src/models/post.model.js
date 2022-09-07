@@ -23,4 +23,4 @@ schemaPost.methods.toJSON = function () {
     return data;
 }
 
-module.exports = model('collecionPost', schemaPost)
+module.exports = model('collectionPost', schemaPost)
