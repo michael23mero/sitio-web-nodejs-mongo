@@ -3,7 +3,7 @@
         <div class="card p-4 mt-4 shadow-lg">
             <div class="card-header"><h2 class="text-center">Save Post</h2></div>
             <form action="/post-save" method="POST" class="mt-2">
-                <input type="text" value="{{update._id}}" name="_id">
+                <input type="hidden" value="{{update._id}}" name="_id">
                 <input type="hidden" value="{{user.username}}" name="user">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Enter your title" name="title" value="{{update.title}}">

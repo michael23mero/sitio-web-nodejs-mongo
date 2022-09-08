@@ -8,6 +8,11 @@ const schemaUser = new Schema(
         username: { type: String },
 
         password: { type: String },
+
+        rol: {
+            type: Schema.Types.String,
+            ref: 'collectionUserRol'
+        }
     },
     {
         timestamps:{createdAt: true, updatedAt: true}
