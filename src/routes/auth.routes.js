@@ -30,7 +30,7 @@ rutas.post('/login', (req, res) => {
         username: req.body.username,
         password: req.body.password
     }).then(resp => {
-        console.log(resp)
+        console.log(resp.data)
         const cookie_ = {
             expires: new Date(Date.now() + process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
             httpOnly: true

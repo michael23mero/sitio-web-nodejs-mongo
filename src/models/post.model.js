@@ -9,7 +9,7 @@ const schemaPost = new Schema(
         url: { type: String },
 
         user: {
-            type: Schema.Types.String,
+            type: Schema.Types.ObjectId,
             ref: 'collectionUser'
         }
     },

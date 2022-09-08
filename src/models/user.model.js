@@ -10,6 +10,7 @@ const schemaUser = new Schema(
         password: { type: String },
 
         rol: {
+            default: 'user',
             type: Schema.Types.String,
             ref: 'collectionUserRol'
         }

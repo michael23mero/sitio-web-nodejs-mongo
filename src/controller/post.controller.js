@@ -9,7 +9,7 @@ const createPost = async (req, res) => {
 
 const readPosts = async (req, res) => {
     const user = await ModelUser.findById(req.userId)
-    const data = await ModelPost.find({user: user.username})
+    const data = await ModelPost.find({user: user._id})
     return res.status(200).json(data)
 }
 
@@ -32,4 +32,12 @@ const getPost = async (req, res) => {
     return res.status(200).json(data)
 }
 
-module.exports = { createPost, readPosts, updatePost, removePost, getPost }
+const getAllPost = async (req, res) => {
+    const data = await ModelPost.find({ user: {$nin: [req.userId]} })
+    return res.status(200).json(data)
+}
+
+module.exports = { 
+    createPost, readPosts, updatePost, removePost, getPost,
+    getAllPost
+}

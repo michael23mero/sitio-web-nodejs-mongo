@@ -36,7 +36,7 @@ const indexUser = async (req, res) => {
 }
 
 const readUser = async (req, res) => {
-    const data = await ModelUser.find({ rol: 'user'})
+    const data = await ModelUser.find({ rol: {$nin:'admin'}})
     return res.status(200).json(data)
 }
 

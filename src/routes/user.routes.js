@@ -11,8 +11,13 @@ rutas.get('/', (req, res) =>{
         axios.get(`${URL}/post/read`, {
             headers: { 'x-access-token': req.cookies.token }
         }).then(resp2 => {
-            console.log(resp2.data)
-            res.render('views-user/home', { title: 'Home', user: resp.data, data: resp2.data })
+            axios.get(`${URL}/post/get`, {
+                headers: { 'x-access-token': req.cookies.token }
+            }).then(resp3 => {
+                res.render('views-user/home', { title: 'Home', user: resp.data, data: resp2.data, datos: resp3.data })
+            }).catch(err => {
+                res.redirect('/login')
+            })
         }).catch(err => {
             res.redirect('/login')
         })
@@ -65,7 +70,7 @@ rutas.post('/post-save', (req, res) => {
                 url: req.body.url,
                 user: req.body.user
             }, headers:{ 'x-access-token': req.cookies.token }
-        }).then(resp => { res.redirect('/home')
+        }).then(resp => { res.redirect('/')
         }).catch(err => { res.redirect('/post-create')
         })
     }else{
@@ -76,7 +81,7 @@ rutas.post('/post-save', (req, res) => {
                 descp: req.body.descp,
                 url: req.body.url
             }, headers:{ 'x-access-token': req.cookies.token }
-        }).then(resp => { res.redirect('/home')
+        }).then(resp => { res.redirect('/')
         }).catch(err => { res.redirect('/post-create')
         })
     }
