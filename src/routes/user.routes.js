@@ -3,7 +3,7 @@ const axios = require('axios')
 
 const URL = 'http://localhost:3000/api/v1'
 
-rutas.get('/home', (req, res) =>{
+rutas.get('/', (req, res) =>{
     axios.get(`${URL}/user`, {
         headers: { 'x-access-token': req.cookies.token }
     }).then(resp => {

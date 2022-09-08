@@ -25,7 +25,7 @@ const loginUser = async (req, res) => {
             return res.status(404).json({ msg: 'Password is incorrect' })
         }else{
             const token = jwt.sign({id: existe._id}, process.env.JWT_SECRET, { expiresIn: 60*60*24 })
-            return res.status(200).json({ msg: 'Welcome', auth: true, accessToken: token })
+            return res.status(200).json({ msg: 'Welcome', auth: true, accessToken: token, role: existe.rol })
         }
     }
 }
@@ -35,4 +35,31 @@ const indexUser = async (req, res) => {
     return res.status(200).json(user)
 }
 
-module.exports = { registerUser, loginUser, indexUser }
+const readUser = async (req, res) => {
+    const data = await ModelUser.find({ rol: 'user'})
+    return res.status(200).json(data)
+}
+
+const updateUser = async (req, res) =>{
+    const { id } = req.params
+    const { ...data } = req.body
+    await ModelUser.findByIdAndUpdate(id, data, {new: true})
+    res.status(200).json({msg: `User updated successfully`})
+}
+
+const removeUser = async (req, res) => {
+    const { id } = req.params
+    await ModelUser.findByIdAndRemove(id)
+    res.status(200).json({msg: 'User deleted successfully'})
+}
+
+const getUser = async (req, res) => {
+    const { id } = req.params
+    const data = await ModelUser.findById(id)
+    return res.status(200).json(data)
+}
+
+module.exports = { 
+    registerUser, loginUser, indexUser,
+    readUser, updateUser, removeUser, getUser
+}

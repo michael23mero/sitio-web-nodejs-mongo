@@ -36,7 +36,8 @@ rutas.post('/login', (req, res) => {
             httpOnly: true
         }
         res.cookie('token', resp.data.accessToken, cookie_)
-        res.redirect('/home')
+        if(resp.data.role === 'user') res.redirect('/')
+        if(resp.data.role === 'admin') res.redirect('/home')
     }).catch(err => {
         console.log(err.response.data.msg)
         res.render('login', {
