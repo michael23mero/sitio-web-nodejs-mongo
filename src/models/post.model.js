@@ -1,4 +1,7 @@
 const { Schema, model } = require('mongoose')
+const date = require('date-and-time')
+
+const now = new Date()
 
 const schemaPost = new Schema(
     {
@@ -7,6 +10,11 @@ const schemaPost = new Schema(
         descp: { type: String },
 
         url: { type: String },
+
+        date: {
+            type: String,
+            default: date.format(now, 'YYYY/MM/DD HH:mm:ss')
+        },
 
         user: {
             type: Schema.Types.ObjectId,

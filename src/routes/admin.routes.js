@@ -10,7 +10,7 @@ rutas.get('/home', (req, res) =>{
         axios.get(`${URL}/users`, {
             headers: { 'x-access-token': req.cookies.token }
         }).then(resp2 => {
-            res.render('views-admin/home', { title: 'Home', user: resp.data, users: resp2.data })
+            res.render('views-admin/home', { title: 'Home', admin: resp.data, users: resp2.data })
         }).catch(err => {
             res.redirect('/login')
         })

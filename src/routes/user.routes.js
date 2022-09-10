@@ -56,7 +56,7 @@ rutas.get('/post-delete/:id', (req, res) => {
     axios({method: 'DELETE',
         url: `${URL}/post/remove/${req.params.id}`,
         headers:{ 'x-access-token': req.cookies.token }
-    }).then(resp => { res.redirect('/home') })
+    }).then(resp => { res.redirect('/') })
 })
 
 rutas.post('/post-save', (req, res) => {

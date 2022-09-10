@@ -33,7 +33,7 @@ const getPost = async (req, res) => {
 }
 
 const getAllPost = async (req, res) => {
-    const data = await ModelPost.find({ user: {$nin: [req.userId]} })
+    const data = await ModelPost.find({ user: {$nin: [req.userId]} }).populate('user')
     return res.status(200).json(data)
 }
 
