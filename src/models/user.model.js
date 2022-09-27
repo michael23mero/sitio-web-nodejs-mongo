@@ -9,6 +9,11 @@ const schemaUser = new Schema(
 
         password: { type: String },
 
+        status: {
+            default: 'false',
+            type: Boolean
+        },
+
         rol: {
             default: 'user',
             type: Schema.Types.String,

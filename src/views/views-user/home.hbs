@@ -1,6 +1,6 @@
 <div class="row mt-4 py-4">
     <div class="col-md-12 mt-5">
-        <h1 class="text-center py-4">Welcome {{ user.username }} <hr></h1>
+        <h1 class="text-center py-4">Welcome {{ user.fullname }}, Estado: '{{user.status}}' <hr></h1>
     </div>
 </div>
 <div class="row">
@@ -37,13 +37,17 @@
 
     <div class="col-md-3">
         <h4 class="text-center">Setting</h4><hr>
+        <a onclick="removeAccount('{{user._id}}')" class="btn btn-danger btn-block"><i class="fas fa-trash"></i> Delete Account</a><br>
+        <a onclick="changeStatus('{{user._id}}')" class="btn btn-info btn-block"><i class="far fa-eye"></i> Status</a>
+        </div>
     </div>
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script type="text/javascript">
     function remove(id){
         Swal.fire({
-        text: '¿ESTA SEGURO?',
+        text: '¿DELETE POST?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -52,6 +56,42 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location = '/post-delete/'+id 
+        }
+        })
+    }
+</script>
+
+<script type="text/javascript">
+    function removeAccount(id){
+        Swal.fire({
+        title: '¿ESTA SEGURO?',
+        text: 'Se eliminara toda su informacion relacionada, incluyendo tus posts',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = '/delete-account/'+id 
+        }
+        })
+    }
+</script>
+
+<script type="text/javascript">
+    function changeStatus(id){
+        Swal.fire({
+        title: '¿CAMBIAR DE ESTADO?',
+        text: 'Los cambios se reflejaran una vez haya iniciado sesion nuevamente',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = '/change-status/'+id 
         }
         })
     }

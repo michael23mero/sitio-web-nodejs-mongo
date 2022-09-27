@@ -1,7 +1,7 @@
 const rutas = require('express').Router()
 const axios = require('axios')
 
-const URL = 'http://localhost:3000/api/v1'
+const URL = 'http://localhost:3001/api/v1'
 
 rutas.get('/', (req, res) =>{
     axios.get(`${URL}/user`, {
@@ -85,6 +85,21 @@ rutas.post('/post-save', (req, res) => {
         }).catch(err => { res.redirect('/post-create')
         })
     }
+})
+
+rutas.get('/delete-account/:id', (req, res) => {
+    axios({method: 'DELETE',
+        url: `${URL}/user/delete/${req.params.id}`,
+        headers: { 'x-access-token': req.cookies.token }
+    }).then(resp => res.redirect('/login'))
+})
+
+rutas.get('/change-status/:id', (req, res) => {
+    axios.get(`${URL}/user/status/${req.params.id}`, {
+        headers: { 'x-access-token': req.cookies.token }
+    }).then(resp => {
+        res.redirect('/')
+    }).catch(err => {console.log(err)})
 })
 
 module.exports = rutas

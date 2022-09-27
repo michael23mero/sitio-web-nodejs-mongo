@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const { ModelUser } = require('../models')
+const { ModelUser, ModelPost} = require('../models')
 
 const registerUser = async (req, res) => {
     const { ...data } = req.body
@@ -28,6 +28,21 @@ const loginUser = async (req, res) => {
             return res.status(200).json({ msg: 'Welcome', auth: true, accessToken: token, role: existe.rol })
         }
     }
+}
+
+const deleteAccount = async (req, res) => {
+    const { id } = req.params
+    await ModelUser.findByIdAndRemove(id)
+    await ModelPost.deleteMany({user: id})
+    return res.status(200).json({msg: `Account deleted successfully`})
+}
+
+const changeStatus = async (req, res) => {
+    const { id } = req.params
+    const estado = await ModelUser.findById(id)
+    estado.status = !estado.status
+    await estado.save()
+    return res.status(200).json({msg: 'User status updated successfully'})
 }
 
 const indexUser = async (req, res) => {
@@ -60,6 +75,6 @@ const getUser = async (req, res) => {
 }
 
 module.exports = { 
-    registerUser, loginUser, indexUser,
+    registerUser, loginUser, deleteAccount, changeStatus, indexUser,
     readUser, updateUser, removeUser, getUser
 }

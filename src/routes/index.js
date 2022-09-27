@@ -5,6 +5,8 @@ const { verifyAuth } = require('../middlewares')
 
 rutas.post('/user/register', userController.registerUser)
 rutas.post('/user/login', userController.loginUser)
+rutas.delete('/user/delete/:id', [ verifyAuth.verifyToken, verifyAuth.isUser ], userController.deleteAccount)
+rutas.get('/user/status/:id', [ verifyAuth.verifyToken, verifyAuth.isUser ], userController.changeStatus)
 
 // **** API INDEX USER ****
 rutas.get('/user', [ verifyAuth.verifyToken, verifyAuth.isUser ],  userController.indexUser)
